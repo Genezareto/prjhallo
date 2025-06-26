@@ -59,10 +59,20 @@ void hapusLagu(string judul) {
     delete temp;
     cout << "Lagu \"" << judul << "\" telah dihapus.\n";
 }
+void cariLagu(string judul) {
+    Lagu* temp = head;
+    while (temp != nullptr) {
+        if (temp->judul == judul) {
+            cout << "Ditemukan: " << temp->judul << " - " << temp->penyanyi << endl;
+            return;
+        }
+        temp = temp->next;
+    }
+    cout << "Lagu \"" << judul << "\" tidak ditemukan.\n";
+}
 int main() {
     int pilihan;
     string judul, penyanyi;
-
 
     do {
         cout << "\n===== Playlist Musik =====\n";
@@ -78,15 +88,23 @@ int main() {
         switch (pilihan) {
             case 1:
                 cout << "Judul Lagu: ";
+                getline(cin, judul);
                 cout << "Penyanyi: ";
+                getline(cin, penyanyi);
+                tambahLagu(judul, penyanyi);
                 break;
             case 2:
+                tampilkanPlaylist();
                 break;
             case 3:
                 cout << "Masukkan judul lagu yang ingin dihapus: ";
+                getline(cin, judul);
+                hapusLagu(judul);
                 break;
             case 4:
                 cout << "Masukkan judul lagu yang dicari: ";
+                getline(cin, judul);
+                cariLagu(judul);
                 break;
             case 5:
                 cout << "Keluar dari program.\n";
